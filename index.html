@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Олон улсын эмэгтэйчүүдийн өдөр 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Mongolian&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose: #c2185b;
+      --rose-light: #f48fb1;
+      --rose-pale: #fce4ec;
+      --gold: #bf9a5a;
+      --cream: #fff8f3;
+      --deep: #3b1a2e;
+      --petal1: #f8bbd0;
+      --petal2: #e91e63;
+    }
+
+    body {
+      background: var(--cream);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      color: var(--deep);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Floating petals */
+    .petals {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      top: -60px;
+      border-radius: 50% 0 50% 0;
+      opacity: 0.55;
+      animation: fallPetal linear infinite;
+    }
+
+    @keyframes fallPetal {
+      0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0.6; }
+      50%  { transform: translateY(50vh) rotate(180deg) translateX(30px); opacity: 0.35; }
+      100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity: 0; }
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .date-badge {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--rose);
+      border: 1px solid var(--rose-light);
+      padding: 0.45rem 1.4rem;
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+      background: rgba(252, 228, 236, 0.5);
+      backdrop-filter: blur(4px);
+      animation: fadeUp 1s ease both;
+    }
+
+    .headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--deep);
+      margin-bottom: 0.5rem;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+
+    .headline em {
+      font-style: italic;
+      color: var(--rose);
+    }
+
+    .subline {
+      font-size: clamp(1.1rem, 3vw, 1.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 1s 0.35s ease both;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 auto 2.5rem;
+      width: min(500px, 90%);
+      animation: fadeUp 1s 0.45s ease both;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--rose-light), transparent);
+    }
+
+    .divider-icon { font-size: 1.5rem; }
+
+    .message-card {
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(194,24,91,0.15);
+      border-radius: 1.5rem;
+      padding: 2.5rem 3rem;
+      max-width: 680px;
+      width: 100%;
+      box-shadow: 0 8px 48px rgba(194,24,91,0.09), 0 2px 8px rgba(0,0,0,0.06);
+      animation: fadeUp 1s 0.55s ease both;
+      margin-bottom: 2.5rem;
+    }
+
+    .message-mn {
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      line-height: 2;
+      color: var(--deep);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+
+    .message-en {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: #8d6a80;
+      font-style: normal;
+      letter-spacing: 0.02em;
+    }
+
+    .signature {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      animation: fadeUp 1s 0.7s ease both;
+      margin-bottom: 2rem;
+    }
+
+    .sig-flowers { font-size: 2rem; letter-spacing: 0.3em; }
+
+    .sig-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--rose);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* Stats ribbon */
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      max-width: 700px;
+      width: 100%;
+      animation: fadeUp 1s 0.85s ease both;
+      margin-bottom: 3rem;
+    }
+
+    .stat-pill {
+      background: linear-gradient(135deg, var(--rose), #ad1457);
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border-radius: 2rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 14px rgba(194,24,91,0.25);
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: #b08aa0;
+      letter-spacing: 0.08em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .message-card { padding: 1.8rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating petals -->
+<div class="petals" id="petals"></div>
+
+<section class="hero">
+
+  <div class="date-badge">March 8 · 2025 · Олон улсын эмэгтэйчүүдийн өдөр</div>
+
+  <h1 class="headline">
+    Хүчтэй. Зоригтой.<br><em>Гайхалтай.</em>
+  </h1>
+  <p class="subline">Strong. Brave. Extraordinary.</p>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-icon">🌸</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="message-card">
+    <p class="message-mn">
+      Эрхэм хамт олон маань,<br><br>
+      Та бүхний тусламж, хөдөлмөр, сэтгэл зориг маш их утга учиртай.
+      Өдөр бүр та нар илүү гэрэлтэй байдаг — манай баг таны дотор байгаа хүчийг үнэлдэг.
+      Энэ онцгой өдрөөр та бүхэнд хайр дүүрэн мэнд хүргэе. 🌺
+    </p>
+    <p class="message-en">
+      To every remarkable woman on our team — your strength, creativity, and dedication
+      make everything possible. Happy International Women's Day. We see you, we value you.
+    </p>
+  </div>
+
+  <div class="signature">
+    <span class="sig-flowers">🌷🌸🌼</span>
+    <span class="sig-text">Хамт олондоо — With love from your team</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat-pill">💪 Та бол хүчтэй</div>
+    <div class="stat-pill">✨ Та бол онцгой</div>
+    <div class="stat-pill">🌟 Та бол гайхалтай</div>
+    <div class="stat-pill">🌸 Баярлалаа</div>
+  </div>
+
+</section>
+
+<footer>
+  Made with 💕 · Олон улсын эмэгтэйчүүдийн өдөр · March 8
+</footer>
+
+<script>
+  // Generate floating petals
+  const container = document.getElementById('petals');
+  const colors = ['#f8bbd0','#f48fb1','#e91e63','#fce4ec','#f06292','#ff80ab'];
+  const sizes  = [10, 14, 18, 22, 12];
+
+  for (let i = 0; i < 28; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const size = sizes[Math.floor(Math.random() * sizes.length)];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const left = Math.random() * 100;
+    const delay = Math.random() * 12;
+    const duration = 8 + Math.random() * 10;
+    p.style.cssText = `
+      left: ${left}%;
+      width: ${size}px;
+      height: ${size * 1.3}px;
+      background: ${color};
+      animation-duration: ${duration}s;
+      animation-delay: -${delay}s;
+      border-radius: ${Math.random() > 0.5 ? '50% 0 50% 0' : '0 50% 0 50%'};
+    `;
+    container.appendChild(p);
+  }
+</script>
+</body>
+</html>
